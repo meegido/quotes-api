@@ -1,5 +1,5 @@
 const createQuote = (payload, repo) => {
-    return repo.createQuote(payload)
+    return repo.save(payload)
 }
 
 module.exports = createQuote

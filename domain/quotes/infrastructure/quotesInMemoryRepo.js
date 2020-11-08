@@ -5,7 +5,7 @@ class QuotesInMemoryRepo {
         return QuotesInMemoryRepo.quotes
     }
 
-    createQuote = (quote) => {
+    save = (quote) => {
         QuotesInMemoryRepo.quotes.push(quote)
 
         return quote
