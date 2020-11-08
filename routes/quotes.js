@@ -1,7 +1,7 @@
 const express = require('express');
-const createQuote = require("../domain/quotes/createQuote");
+const createQuote = require("../domain/quotes/actions/createQuote");
 const QuotesInMemoryRepo = require("../domain/quotes/infrastructure/quotesInMemoryRepo");
-const retrieveQuotes = require("../domain/quotes/retrieveQuotes");
+const retrieveQuotes = require("../domain/quotes/actions/retrieveQuotes");
 const router = express.Router();
 
 router.post('/', function(req, res, next) {

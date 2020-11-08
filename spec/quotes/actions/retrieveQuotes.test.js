@@ -1,5 +1,5 @@
 const QuotesInMemoryRepo = require("../../../domain/quotes/infrastructure/quotesInMemoryRepo");
-const retrieveQuotes = require("../../../domain/quotes/retrieveQuotes");
+const retrieveQuotes = require("../../../domain/quotes/actions/retrieveQuotes");
 
 describe('Retrieve quotes', () => {
     it('retrieves all quotes', () => {
