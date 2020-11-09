@@ -1,5 +1,5 @@
 const QuoteModel = require("./models")
-const Quote = require("../../../spec/quotes/quote");
+const Quote = require("../quote");
 
 class QuotesMongoRepo {
     constructor() {
@@ -8,7 +8,6 @@ class QuotesMongoRepo {
 
     async save(quote) {
         const document = new this.model(quote)
-
         return document.save()
     }
 

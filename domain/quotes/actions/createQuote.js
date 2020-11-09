@@ -1,5 +1,5 @@
-const createQuote = (payload, repo) => {
-    return repo.save(payload)
+const createQuote = async(payload, repo) => {
+    return await repo.save(payload)
 }
 
 module.exports = createQuote

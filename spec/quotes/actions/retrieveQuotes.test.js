@@ -1,6 +1,6 @@
 const retrieveQuotes = require("../../../domain/quotes/actions/retrieveQuotes");
 const QuotesMongoRepo = require("../../../domain/quotes/infrastructure/quotesMongoRepo");
-const Quote = require("../quote");
+const Quote = require("../../../domain/quotes/quote");
 
 describe('Retrieve quotes', () => {
     it('retrieves all quotes', async () => {

@@ -1,12 +1,9 @@
 const mongoose = require('mongoose');
 const QuotesMongoRepo = require('../../../domain/quotes/infrastructure/quotesMongoRepo');
-const Quote = require("../quote");
+const Quote = require("../../../domain/quotes/quote");
 const QuoteModel = require("../../../domain/quotes/infrastructure/models");
 
 describe('Quotes MongoDb Repository', () => {
-    let connection
-    let db
-
     beforeAll(async () => {
         await mongoose.connect(global.__MONGO_URI__, { useNewUrlParser: true, useCreateIndex: true }, (err) => {
             if (err) {
