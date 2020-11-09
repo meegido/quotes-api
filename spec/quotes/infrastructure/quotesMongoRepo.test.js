@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
 const QuotesMongoRepo = require('../../../domain/quotes/infrastructure/quotesMongoRepo');
 const Quote = require("../quote");
+const QuoteModel = require("../../../domain/quotes/infrastructure/models");
 
 describe('Quotes MongoDb Repository', () => {
+    let connection
+    let db
 
     beforeAll(async () => {
         await mongoose.connect(global.__MONGO_URI__, { useNewUrlParser: true, useCreateIndex: true }, (err) => {
@@ -12,6 +15,10 @@ describe('Quotes MongoDb Repository', () => {
             }
         });
     });
+
+    beforeEach(async () => {
+        await QuoteModel.deleteMany({})
+    })
 
     it('creates & saves quotes successfully', async () => {
         const quoteRepo = new QuotesMongoRepo()

@@ -40,6 +40,3 @@ describe('GET /quotes', () => {
     }])
   })
 })
-
-
-const deleteQuotes = () => {  QuotesInMemoryRepo.quotes = [] }
