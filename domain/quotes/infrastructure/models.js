@@ -4,6 +4,6 @@ const QuoteSchema = new mongoose.Schema({
     sentence: { type: String, required: true},
 });
 
-const Quote = mongoose.model('Quotes', QuoteSchema);
+const QuoteModel = mongoose.model('Quotes', QuoteSchema);
 
-module.exports = Quote
+module.exports = QuoteModel

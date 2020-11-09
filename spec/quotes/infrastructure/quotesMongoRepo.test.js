@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const QuotesMongoRepo = require('../../../domain/quotes/infrastructure/quotesMongoRepo');
-const Quote = require("../../../domain/quotes/infrastructure/models");
+const Quote = require("../quote");
 
 describe('Quotes MongoDb Repository', () => {
 
@@ -14,10 +14,22 @@ describe('Quotes MongoDb Repository', () => {
     });
 
     it('creates & saves quotes successfully', async () => {
-        const quote = new QuotesMongoRepo(Quote)
-        const savedQuote = await quote.save({sentence: 'La frasecica'})
+        const quoteRepo = new QuotesMongoRepo()
+        const quote = new Quote('La frasecica')
+
+        const savedQuote = await quoteRepo.save(quote)
 
         expect(savedQuote._id).toBeDefined()
         expect(savedQuote.sentence).toBe('La frasecica')
+    });
+
+    it('retrieves all quotes', async () => {
+        const quoteRepo = new QuotesMongoRepo()
+        const quote = new Quote('La frasecica')
+        await quoteRepo.save(quote)
+
+        const quotes = await quoteRepo.retrieveAll()
+
+        expect(quotes).toEqual([quote])
     });
 })
