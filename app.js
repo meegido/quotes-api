@@ -8,19 +8,7 @@ const quotesRouter = require('./routes/quotes');
 
 const app = express();
 
-const whitelist = [
-    'http://localhost:3000',
-];
-
-const corsOptions = {
-    origin: function(origin, callback){
-        let originIsWhitelisted = whitelist.indexOf(origin) !== -1;
-        callback(new Error('Not allowed by CORS'), originIsWhitelisted);
-    },
-    credentials: true
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());
