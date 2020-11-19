@@ -5,15 +5,6 @@ const QuotesInMemoryRepo = require("../domain/quotes/infrastructure/quotesInMemo
 const QuoteModel = require("../domain/quotes/infrastructure/models")
 
 describe('POST /quotes', () => {
-    beforeAll(async () => {
-        await mongoose.connect(global.__MONGO_URI__, { useNewUrlParser: true, useCreateIndex: true }, (err) => {
-            if (err) {
-                console.error(err);
-                process.exit(1);
-            }
-        });
-    });
-
     beforeEach(async () => {
         await QuoteModel.deleteMany({})
     })
@@ -34,15 +25,6 @@ describe('POST /quotes', () => {
 
 
 describe('GET /quotes', () => {
-    beforeAll(async () => {
-        await mongoose.connect(global.__MONGO_URI__, {useNewUrlParser: true, useCreateIndex: true}, (err) => {
-            if (err) {
-                console.error(err);
-                process.exit(1);
-            }
-        });
-    });
-
     beforeEach(async () => {
         await mongoose.connection.db.dropDatabase()
     })
