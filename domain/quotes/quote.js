@@ -1,5 +1,6 @@
 class Quote {
-    constructor(sentence) {
+    constructor(id, sentence) {
+        this.id = id
         this.sentence = sentence
     }
 }

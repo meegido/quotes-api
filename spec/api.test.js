@@ -26,6 +26,7 @@ describe('POST /quotes', () => {
           })
         expect(response.statusCode).toEqual(201)
         expect(response.body).toEqual({
+            id: expect.anything(),
             sentence: 'This is a sentence'
         })
     })
@@ -33,25 +34,34 @@ describe('POST /quotes', () => {
 
 
 describe('GET /quotes', () => {
-  beforeEach(() => {
-    QuotesInMemoryRepo.deleteAll();
-  });
+    beforeAll(async () => {
+        await mongoose.connect(global.__MONGO_URI__, {useNewUrlParser: true, useCreateIndex: true}, (err) => {
+            if (err) {
+                console.error(err);
+                process.exit(1);
+            }
+        });
+    });
 
+    beforeEach(async () => {
+        await mongoose.connection.db.dropDatabase()
+    })
 
-  it('should retrieve all quotes', async () => {
-    await request(app)
-      .post('/quotes')
-      .send({
-        sentence: 'This is a sentence',
-      })
+    it('should retrieve all quotes', async () => {
+        await request(app)
+            .post('/quotes')
+            .send({
+                sentence: 'This is a sentence',
+            })
 
-    const response = await request(app)
-      .get('/quotes')
-      .send()
+        const response = await request(app)
+            .get('/quotes')
+            .send()
 
-    expect(response.statusCode).toEqual(200)
-    expect(response.body).toEqual([{
-        sentence: 'This is a sentence'
-    }])
-  })
+        expect(response.statusCode).toEqual(200)
+        expect(response.body).toEqual([{
+            id: expect.anything(),
+            sentence: 'This is a sentence'
+        }])
+    })
 })

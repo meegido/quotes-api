@@ -18,22 +18,23 @@ describe('Quotes MongoDb Repository', () => {
     })
 
     it('creates & saves quotes successfully', async () => {
-        const quoteRepo = new QuotesMongoRepo()
-        const quote = new Quote('La frasecica')
+        const repository = new QuotesMongoRepo()
+        const quote = new Quote(null, 'This is a sentence')
 
-        const savedQuote = await quoteRepo.save(quote)
+        const savedQuote = await repository.save(quote)
 
-        expect(savedQuote._id).toBeDefined()
-        expect(savedQuote.sentence).toBe('La frasecica')
+        expect(savedQuote.id).toBeDefined()
+        expect(savedQuote.sentence).toBe('This is a sentence')
     });
 
     it('retrieves all quotes', async () => {
-        const quoteRepo = new QuotesMongoRepo()
-        const quote = new Quote('La frasecica')
-        await quoteRepo.save(quote)
+        const repository = new QuotesMongoRepo()
+        const quote = new Quote(null, 'This is a sentence')
+        await repository.save(quote)
 
-        const quotes = await quoteRepo.retrieveAll()
+        const quotes = await repository.retrieveAll()
 
-        expect(quotes).toEqual([quote])
+        expect(quotes.length).toEqual(1)
+
     });
 })

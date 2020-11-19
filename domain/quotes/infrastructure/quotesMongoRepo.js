@@ -8,13 +8,15 @@ class QuotesMongoRepo {
 
     async save(quote) {
         const document = new this.model(quote)
-        return document.save()
+        await document.save({sentence: quote.sentence})
+
+        return new Quote(document._id, document.sentence)
     }
 
     async retrieveAll() {
         const quotes =  await this.model.find({})
 
-        return quotes.map((quote) => new Quote(quote.sentence))
+        return quotes.map((quote) => new Quote(quote._id, quote.sentence))
     }
 }
 

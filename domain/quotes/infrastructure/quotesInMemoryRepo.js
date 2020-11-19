@@ -1,18 +1,14 @@
 class QuotesInMemoryRepo {
-    static quotes = []
+    quotes = []
 
     retrieveAll = () => {
-        return QuotesInMemoryRepo.quotes
+        return this.quotes
     }
 
     save = (quote) => {
-        QuotesInMemoryRepo.quotes.push(quote)
+        this.quotes.push(quote)
 
         return quote
-    }
-
-    static deleteAll = () => {
-        QuotesInMemoryRepo.quotes = []
     }
 }
 

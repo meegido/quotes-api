@@ -1,26 +1,15 @@
-const mongoose = require('mongoose');
 const createQuote = require("../../../domain/quotes/actions/createQuote");
-const QuotesMongoRepo = require("../../../domain/quotes/infrastructure/quotesMongoRepo");
-const QuoteModel = require("../../../domain/quotes/infrastructure/models");
+const QuotesInMemoryRepo = require("../../../domain/quotes/infrastructure/quotesInMemoryRepo");
 
 describe('Create quote', () => {
-    beforeAll(async () => {
-        await mongoose.connect(global.__MONGO_URI__, { useNewUrlParser: true, useCreateIndex: true }, (err) => {
-            if (err) {
-                console.error(err);
-                process.exit(1);
-            }
-        });
-    });
-
-    beforeEach(async () => {
-        await QuoteModel.deleteMany({})
-    })
-
     it('creates a quote ', async () => {
-        const repo = new QuotesMongoRepo()
-        const actionResult = await createQuote({sentence: 'This is a sentence'}, repo)
+        const repo = new QuotesInMemoryRepo()
+        const quote = {sentence: 'This is a sentence'};
 
-        expect(actionResult).toEqual({sentence: 'This is a sentence'})
+        const actionResult = await createQuote(quote, repo)
+
+        const createdQuotes = repo.retrieveAll()
+        expect(actionResult).toEqual({'sentence': 'This is a sentence'})
+        expect(createdQuotes.length).toEqual(1)
     });
 });
