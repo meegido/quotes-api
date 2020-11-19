@@ -10,13 +10,13 @@ class QuotesMongoRepo {
         const document = new this.model(quote)
         await document.save({sentence: quote.sentence})
 
-        return new Quote(document._id, document.sentence)
+        return new Quote({id: document._id, sentence: document.sentence})
     }
 
     async retrieveAll() {
         const quotes =  await this.model.find({})
 
-        return quotes.map((quote) => new Quote(quote._id, quote.sentence))
+        return quotes.map((quote) => new Quote({id: quote._id, sentence: quote.sentence}))
     }
 }
 

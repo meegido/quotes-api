@@ -19,7 +19,7 @@ describe('Quotes MongoDb Repository', () => {
 
     it('creates & saves quotes successfully', async () => {
         const repository = new QuotesMongoRepo()
-        const quote = new Quote(null, 'This is a sentence')
+        const quote = new Quote({sentence: 'This is a sentence'})
 
         const savedQuote = await repository.save(quote)
 
@@ -29,12 +29,15 @@ describe('Quotes MongoDb Repository', () => {
 
     it('retrieves all quotes', async () => {
         const repository = new QuotesMongoRepo()
-        const quote = new Quote(null, 'This is a sentence')
+        const quote = new Quote({sentence: 'This is a sentence'})
         await repository.save(quote)
 
         const quotes = await repository.retrieveAll()
 
-        expect(quotes.length).toEqual(1)
+        expect(quotes).toEqual([{
+            id: expect.anything(),
+            sentence: 'This is a sentence'
+        }])
 
     });
 })
