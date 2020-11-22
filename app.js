@@ -3,8 +3,13 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const mongoose = require('mongoose');
 
 const quotesRouter = require('./routes/quotes');
+
+mongoose.connect('mongodb://localhost/express-mongo', { useNewUrlParser: true })
+    .then(() => console.log('MongoDB Connected'))
+    .catch(err => console.log(err));
 
 const app = express();
 

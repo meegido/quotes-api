@@ -1,13 +1,15 @@
-const QuotesInMemoryRepo = require("../../../domain/quotes/infrastructure/quotesInMemoryRepo");
 const retrieveQuotes = require("../../../domain/quotes/actions/retrieveQuotes");
+const Quote = require("../../../domain/quotes/quote");
+const QuotesInMemoryRepo = require("../../../domain/quotes/infrastructure/quotesInMemoryRepo");
 
 describe('Retrieve quotes', () => {
-    it('retrieves all quotes', () => {
+    it('retrieves all quotes', async () => {
         const repo = new QuotesInMemoryRepo()
-        repo.save({sentence: 'This is a sentence'})
+        const quote = new Quote('This is a sentence')
+        repo.save(quote)
 
-        const quotes = retrieveQuotes(repo)
+        const quotes = await retrieveQuotes(repo)
 
-        expect(quotes).toEqual([{sentence: 'This is a sentence'}])
+        expect(quotes).toEqual([quote])
     });
 });

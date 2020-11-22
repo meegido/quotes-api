@@ -10,10 +10,6 @@ class QuotesInMemoryRepo {
 
         return quote
     }
-
-    static deleteAll = () => {
-        QuotesInMemoryRepo.quotes = []
-    }
 }
 
 module.exports = QuotesInMemoryRepo
